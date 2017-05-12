@@ -71,7 +71,7 @@ import serial # for serial comms
 ######################## Begin User Defined Parameters ########################
 ###############################################################################
 #port = 'COM3'
-port = 'COM5'
+port = 'COM9'
 baud_rate = 9600
 
 #E5071C_addr = 'USB0::0x0957::0x0D09::MY46212637::0::INSTR'
@@ -82,9 +82,9 @@ E5071C_addr = 'GPIB0::16::INSTR'
 
 # While movement must be complete to move onto the next one, this allows extra
 # time for any vibrations in the fixture to settle down
-CNC_dwell = 1 #4   # Time in s, currently also being used to let avg average things
+CNC_dwell = 0 #4   # Time in s, currently also being used to let avg average things
 
-DaQ_dwell = 1   # Time in s after sending capture command before doing
+DaQ_dwell = 0   # Time in s after sending capture command before doing
                 # something else. i.e. how long VNA takes to capture data
 '''Modes:
 Mode 0 = Print settings
@@ -200,6 +200,11 @@ elif mode == 5:
 elif mode == 6:
     Console.timeStamp('Debug Mode.')
     CS.debugMode(CNC_dwell, DaQ_dwell)
+elif mode == 7:
+	Console.timeStamp('Movement debug mode')
+	objectCNC = Grbl.connectGRBL(port, baud_rate)
+	CS.debugModeMovement(objectCNC, port, baud_rate, CNC_dwell, DaQ_dwell)
+	objectCNC.close()
 else:
     Console.timeStamp('Invalid mode entered! Mode is INT in the valid range of' +
         ' modes.', 1)
