@@ -7,6 +7,4 @@ Run CSCANV2 and do movement test mode (option 2) or something to load the librar
 
 open NI VISA interactive control and search for somethign that look slike the VNA
 
-
-
-GM background check ext 6236
+Grbl 0.8c
